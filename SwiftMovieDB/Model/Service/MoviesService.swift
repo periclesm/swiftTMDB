@@ -20,6 +20,8 @@ class MoviesService: MovieListProtocol, @unchecked Sendable {
 		self.popular = popular
 	}
 	
+	//Data fetching functions per service
+	
 	func searchMovies(searchTerm: String, page: Int) async -> MovieList? {
 		return await searchMovies.searchMovies(searchTerm: searchTerm, page: page)
 	}

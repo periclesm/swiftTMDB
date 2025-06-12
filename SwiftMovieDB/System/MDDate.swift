@@ -15,10 +15,10 @@ enum DateFormat: String {
 
 final class MDDate: @unchecked Sendable {
 	
-	///A shared instance object for the formatter to be available whenever needed from any caller.
+	//A shared instance object for the formatter to be available whenever needed from anywhere.
 	static let shared = MDDate()
 	
-	///The Date formatter
+	//The Date formatter
 	private var formatter = DateFormatter()
 	
 	private init() {
@@ -27,7 +27,7 @@ final class MDDate: @unchecked Sendable {
 		formatter.timeZone = TimeZone.current
 	}
 	
-	///Converts a date string into a Date object.
+	///Converts a date `String` into a `Date` object.
 	func convertStringToDate(dateString: String?, format: DateFormat) -> Date {
 		guard let stringDate = dateString else {
 			return Date()
@@ -43,7 +43,7 @@ final class MDDate: @unchecked Sendable {
 		}
 	}
 	
-	///Converts a Date object into a string.
+	///Converts a `Date` object into a `String`.
 	func convertDateToString(date: Date?, format: DateFormat) -> String {
 		if let inputDate = date {
 			self.formatter.dateFormat = format.rawValue
@@ -55,7 +55,7 @@ final class MDDate: @unchecked Sendable {
 		}
 	}
 	
-	///Converts a date string from one format into another.
+	///Converts a date `String` from one format into another.
 	func convertDateFormat(inputString: String?, fromFormat: DateFormat, toFormat: DateFormat) -> String {
 		guard let inputDate = inputString else {
 			return "2020-01-01"

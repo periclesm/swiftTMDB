@@ -27,7 +27,6 @@ class MovieVC: UITableViewController {
 		setupUI()
     }
 	
-	//Assign the selected movie values into UI components.
 	private func setupUI() {
 		movieTitle.text = vm.movie?.title
 		movieReleaseDate.text = vm.releaseDateString()

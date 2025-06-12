@@ -7,6 +7,9 @@
 
 import UIKit
 
+/*
+ Practically speaking, this VM serves only as datastore of a single movie (the one user selected) and its data transformation functions.
+ */
 class MovieVM: NSObject {
 		
 	///Object to contain the user selected movie.

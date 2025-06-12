@@ -9,6 +9,11 @@ import Foundation
 
 class TopRatedService: MovieListProtocol, @unchecked Sendable {
 	
+	/*
+	 Fetching the service data. Checks for status code and errs if not 200(OK)
+	 Data are returned decoded to the requested type.
+	 */
+	
 	func getTopRated(page: Int) async -> MovieList? {
 		let api = DataAPI()
 		let request = api.getRequest(url: api.getTopRatedEndpoint(page: page))

@@ -17,21 +17,26 @@ class SearchVM: NSObject {
 	
 	var mode: MoviesMode = .search
 	
-	///Array with all movies to be used in UITableView cells.
+	///Dataset for all movies to be displayed. THis may contain search movie results, top-rated movies etc.
 	private(set) var movies: MovieDataType = []
 	
 	///The current page index.
 	var currentPage = 1
+	
+	///Total number of pages as returned by TMDB.
 	var totalPages = 0
+	
+	///Total number of results (movies) as returned by TMDB.
 	var totalResults = 0
 	
+	///Fallback closure on View Controller to update data on tableview.
 	var onDataUpdate: (() -> Void)?
 	
 	init(service: MoviesService) {
 		self.service = service
 	}
 	
-	///Clears all data from VM and DataStore and resets counters.
+	///Clears all data from datastore and resets counters.
 	func clearData() {
 		movies.removeAll()
 		currentPage = 1
@@ -39,11 +44,8 @@ class SearchVM: NSObject {
 		totalResults = 0
 	}
 	
-	/**
-	 Performs the search and fills the movies array with results
-	 Completion, if successful, will reload the UITableView and display what has been fetched.
-	 */
 	
+	///Performs the search with the given term.
 	@MainActor
 	func search(searchTerm: String?) async {
 		guard let searchTerm else {
@@ -71,6 +73,7 @@ class SearchVM: NSObject {
 		}
 	}
 	
+	///Returns the Top-Voted movies from TMDB.
 	@MainActor
 	func top() async {
 		mode = .top
@@ -87,6 +90,7 @@ class SearchVM: NSObject {
 		}
 	}
 	
+	///Returns upcoming movies from TMDB.
 	@MainActor
 	func upcoming() async {
 		mode = .upcoming
@@ -103,6 +107,7 @@ class SearchVM: NSObject {
 		}
 	}
 	
+	///Returns popular movies.
 	@MainActor
 	func popular() async {
 		mode = .popular
@@ -119,7 +124,7 @@ class SearchVM: NSObject {
 		}
 	}
 	
-	///Increments the pageIndex up to the count of total pages as reported in the API payload.
+	///Increments the pageIndex up to the count of total pages as reported by the API.
 	func pageIncrement() {
 		if currentPage < totalPages {
 			currentPage += 1

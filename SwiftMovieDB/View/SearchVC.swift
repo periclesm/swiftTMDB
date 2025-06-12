@@ -7,7 +7,7 @@
 
 import UIKit
 
-///Movie UITableViewCell subclassed from GenericCell to inherit all custom properties plus its own.
+///Custom UITableViewCell with its IBOutlets.
 class MovieCell: UITableViewCell {
 	@IBOutlet weak var movieImage: UIImageView!
 	@IBOutlet weak var movieTitle: UILabel!
@@ -17,6 +17,7 @@ class MovieCell: UITableViewCell {
 
 class SearchVC: UITableViewController {
 	
+	//View displaying content when there are no data in the UITableView
 	@IBOutlet weak var backgroundView: UIView!
 	
 	private let searchController = UISearchController(searchResultsController: nil)
@@ -34,7 +35,6 @@ class SearchVC: UITableViewController {
 		if segue.identifier == "DetailSegue" {
 			let dvc = segue.destination as! MovieVC
 			if let object = sender as? Movie {
-				//Send the selected movie to the (by now initialized) MovieVM object
 				dvc.vm = MovieVM()
 				dvc.vm.movie = object
 			}
@@ -43,7 +43,7 @@ class SearchVC: UITableViewController {
 	
 	private func setupUI() {
 		self.tableView.backgroundView = backgroundView
-		navigationItem.hidesSearchBarWhenScrolling = false // Optional
+		navigationItem.hidesSearchBarWhenScrolling = false
 		navigationItem.backButtonDisplayMode = .minimal
 		
 		searchController.searchResultsUpdater = self
@@ -59,6 +59,7 @@ class SearchVC: UITableViewController {
 		let upcomingService = UpcomingService()
 		let popularService = PopularService()
 		
+		//Passing all services needed in the View in the
 		let moviesService = MoviesService(searchMovies: searchService,
 										  topRated: topRatedService,
 										  upcoming: upcomingService,
@@ -133,11 +134,10 @@ class SearchVC: UITableViewController {
 	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		/*
 		 When preparing to display the cell, make certain checks and fetch the next results page.
-		 IF <cell is the last in table> AND <total tableview data is less than total search results> THEN <increment page by one> AND fetch next page data
-		 New data will be parsed and appended in DataManager and (upon completion) table view will reload data.
+		 IF <the cell is the third before the last in table> (give a small heads up for loading) AND <total tableview data is less than total search results> THEN <increment page by one> AND fetch next page. New data will be appended at the end of vm.movies list.
 		 */
 		
-		if (indexPath.row+1 == vm.movies.count) && (vm.movies.count < vm.totalResults) {
+		if (indexPath.row == vm.movies.count-3) && (vm.movies.count < vm.totalResults) {
 			vm.pageIncrement()
 			switch vm.mode {
 				case .search:
@@ -160,7 +160,6 @@ class SearchVC: UITableViewController {
 						await vm.popular()
 					}
 			}
-			
 		}
 	}
 	
@@ -169,14 +168,6 @@ class SearchVC: UITableViewController {
 		
 		let movie = vm.movies[indexPath.row]
 		self.performSegue(withIdentifier: "DetailSegue", sender: movie)
-	}
-    
-	//MARK: - Search methods
-	
-	///Clear search data method.
-	func clearSearch(reload: Bool = true) {
-		vm.clearData()
-		self.tableView.reloadData()
 	}
 }
 
@@ -188,10 +179,16 @@ extension SearchVC: UISearchResultsUpdating {
 
 extension SearchVC: UISearchBarDelegate {
 	
+	///Clear search data method.
+	func clearSearch(reload: Bool = true) {
+		vm.clearData()
+		self.tableView.reloadData()
+	}
+	
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		if searchText.isEmpty {
-			//clear all data when user deletes all characters with backspace.
-			self.clearSearch()
+			//clear all data when user deletes all characters.
+			clearSearch()
 		}
 	}
 	
@@ -214,7 +211,7 @@ extension SearchVC: UISearchBarDelegate {
 		searchBar.resignFirstResponder()
 		
 		//Clear all previous data for a fresh search.
-		self.clearSearch()
+		clearSearch()
 		
 		//R U paying attention? Or am I talking to myself?
 		Task(priority: .userInitiated) {
