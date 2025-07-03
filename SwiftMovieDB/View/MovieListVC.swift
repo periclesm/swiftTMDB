@@ -1,34 +1,33 @@
 //
-//  SearchVC.swift
+//  MovieListVC.swift
 //  SwiftMovieDB
 //
-//  Created by Pericles Maravelakis on 9/6/25.
+//  Created by Pericles Maravelakis on 2/7/25.
 //
 
 import UIKit
 
-///Custom UITableViewCell with its IBOutlets.
-class MovieCell: UITableViewCell {
-	@IBOutlet weak var movieImage: UIImageView!
-	@IBOutlet weak var movieTitle: UILabel!
-	@IBOutlet weak var movieYear: UILabel!
-	@IBOutlet weak var movieDetail: UILabel!
-}
-
-class SearchVC: UITableViewController {
+class MovieListVC: UITableViewController {
 	
-	//View displaying content when there are no data in the UITableView
+	//Set the View mode for this VC to fetch and display the appropreate data
+	var mode: ServiceMode = .top
+	
+	//Define the View Model
+	private var vm: MovieViewModel!
+	
+	//Used only when mode = .search
 	@IBOutlet weak var backgroundView: UIView!
-	
-	private let searchController = UISearchController(searchResultsController: nil)
-	
-	///Initialize the View Model
-	private var vm: SearchVM!
+	private var searchController : UISearchController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		if mode == .search {
+			searchController = UISearchController(searchResultsController: nil)
+		}
+		
 		setupUI()
 		bindVM()
+		getData()
     }
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,80 +41,75 @@ class SearchVC: UITableViewController {
 	}
 	
 	private func setupUI() {
-		self.tableView.backgroundView = backgroundView
-		navigationItem.hidesSearchBarWhenScrolling = false
 		navigationItem.backButtonDisplayMode = .minimal
 		
-		searchController.searchResultsUpdater = self
-		searchController.obscuresBackgroundDuringPresentation = false
-		searchController.searchBar.placeholder = "search the Movie Database"
-		searchController.searchBar.delegate = self
-		navigationItem.searchController = searchController
+		switch mode {
+			case .top:
+				title = "Top Rated Movies"
+			case .upcoming:
+				title = "Upcoming Movies"
+			case .popular:
+				title = "Popular Movies"
+			case .search:
+				title = "Search"
+				
+			@unknown default:
+				fatalError("Seems like you forgotten something")
+		}
+		
+		if mode == .search {
+			self.tableView.backgroundView = backgroundView
+			navigationItem.hidesSearchBarWhenScrolling = false
+			
+			//Enable the following line and the extension below only when live update (aka, each time the user types a character) is needed
+			//searchController?.searchResultsUpdater = self
+			searchController?.obscuresBackgroundDuringPresentation = false
+			searchController?.searchBar.placeholder = "search the Movie Database"
+			searchController?.searchBar.delegate = self
+			navigationItem.searchController = searchController
+		}
 	}
 	
 	private func bindVM() {
-		let searchService = SearchService()
-		let topRatedService = TopRatedService()
-		let upcomingService = UpcomingService()
-		let popularService = PopularService()
-		
-		//Passing all services needed in the View in the
-		let moviesService = MoviesService(searchMovies: searchService,
-										  topRated: topRatedService,
-										  upcoming: upcomingService,
-										  popular: popularService)
-		
-		vm = SearchVM(service: moviesService)
+		let service = MoviesService(service: mode)
+		vm = MovieViewModel(service)
 		
 		vm.onDataUpdate = { [weak self] in
 			self?.tableView.reloadData()
 		}
 	}
 	
-	//MARK: - IBActions
-	
-	@IBAction func topMovies() {
+	@IBAction func getData() {
 		Task(priority: .userInitiated) {
-			await vm.top()
+			await vm.fetchData(for: mode)
+			self.refreshControl?.endRefreshing()
 		}
-	}
-	
-	@IBAction func upcomingMovies() {
-		Task(priority: .userInitiated) {
-			await vm.upcoming()
-		}
-	}
-	
-	@IBAction func popularMovies() {
-		Task(priority: .userInitiated) {
-			await vm.popular()
-		}
-	}
-	
-	@IBAction func resetAction() {
-		vm.clearData()
-		tableView.reloadData()
 	}
 
-    // MARK: - Table view data source
+    // MARK: - Table view
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		// Show/hide backgound depending on the UITableView array count.
-		vm.movies.isEmpty ? (self.tableView.backgroundView?.isHidden = false) : (self.tableView.backgroundView?.isHidden = true)
+		vm.movies.isEmpty ? (tableView.backgroundView?.isHidden = false) : (tableView.backgroundView?.isHidden = true)
 		return vm.movies.count
-    }
+	}
 	
 	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		if vm.movies.isEmpty { return nil }
-		else { return "Total: \(vm.totalResults) results" }
+		
+		if mode == .search {
+			return "Total: \(vm.totalResults) movies"
+		}
+		
+		return nil
 	}
 	
 	override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
 		let header = view as! UITableViewHeaderFooterView
 		header.textLabel?.text = header.textLabel?.text?.capitalized
 	}
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let movie = vm.movies[indexPath.row]
 		
 		let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as! MovieCell
@@ -125,11 +119,9 @@ class SearchVC: UITableViewController {
 		cell.movieDetail.text = "User Score: \(movie.voteAverage.percentageString)\nPopularity: \(String(format: "%.1f", movie.popularity))"
 		
 		ImageManager().setImage(into: cell.movieImage, from: movie.posterPath)
-
+		
 		return cell
-    }
-	
-	// MARK: - Table view delegate
+	}
 	
 	override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 		/*
@@ -139,10 +131,12 @@ class SearchVC: UITableViewController {
 		
 		if (indexPath.row == vm.movies.count-3) && (vm.movies.count < vm.totalResults) {
 			vm.pageIncrement()
-			switch vm.mode {
+			switch mode {
 				case .search:
 					Task(priority: .userInitiated) {
-						await vm.search(searchTerm: searchController.searchBar.text)
+						if let searchTerm = searchController?.searchBar.text {
+							await vm.search(searchTerm: searchTerm)
+						}
 					}
 					
 				case .upcoming:
@@ -167,19 +161,20 @@ class SearchVC: UITableViewController {
 		tableView.deselectRow(at: indexPath, animated: true)
 		
 		let movie = vm.movies[indexPath.row]
-		self.performSegue(withIdentifier: "DetailSegue", sender: movie)
+		performSegue(withIdentifier: "DetailSegue", sender: movie)
 	}
 }
 
-extension SearchVC: UISearchResultsUpdating {
-	func updateSearchResults(for searchController: UISearchController) {
-		//Since using Search Bar delegate, nothing to do here.
-	}
-}
+//MARK: - Search Delegates
+//extension MovieListVC: UISearchResultsUpdating {
+//	func updateSearchResults(for searchController: UISearchController) {
+//		//Since using Search Bar delegate, nothing to do here.
+//	}
+//}
 
-extension SearchVC: UISearchBarDelegate {
+extension MovieListVC: UISearchBarDelegate {
 	
-	///Clear search data method.
+	///Clears search data.
 	func clearSearch(reload: Bool = true) {
 		vm.clearData()
 		self.tableView.reloadData()
@@ -219,5 +214,3 @@ extension SearchVC: UISearchBarDelegate {
 		}
 	}
 }
-
-

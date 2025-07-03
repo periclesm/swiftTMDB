@@ -5,36 +5,50 @@
 //  Created by Pericles Maravelakis on 10/6/25.
 //
 
+enum ServiceMode {
+	case search, top, upcoming, popular
+}
+
 import Foundation
 
 class MoviesService: MovieListProtocol, @unchecked Sendable {
-	private let searchMovies: SearchService
-	private let topRated: TopRatedService
-	private let upcoming: UpcomingService
-	private let popular: PopularService
+	private var movieService: Any
 	
-	init(searchMovies: SearchService, topRated: TopRatedService, upcoming: UpcomingService, popular: PopularService) {
-		self.searchMovies = searchMovies
-		self.topRated = topRated
-		self.upcoming = upcoming
-		self.popular = popular
+	init(service: ServiceMode) {
+		switch service {
+			case .search:
+				movieService = SearchService()
+				
+			case .top:
+				movieService = TopRatedService()
+				
+			case .upcoming:
+				movieService = UpcomingService()
+				
+			case .popular:
+				movieService = PopularService()
+		}
 	}
 	
 	//Data fetching functions per service
 	
 	func searchMovies(searchTerm: String, page: Int) async -> MovieList? {
-		return await searchMovies.searchMovies(searchTerm: searchTerm, page: page)
+		let service = movieService as! SearchService
+		return await service.searchMovies(searchTerm: searchTerm, page: page)
 	}
 	
 	func getTopRated(page: Int) async -> MovieList? {
-		return await topRated.getTopRated(page: page)
+		let service = movieService as! TopRatedService
+		return await service.getTopRated(page: page)
 	}
 	
 	func getUpcoming(page: Int) async -> UpcomingMovies? {
-		return await upcoming.getUpcoming(page: page)
+		let service = movieService as! UpcomingService
+		return await service.getUpcoming(page: page)
 	}
 	
 	func getPopular(page: Int) async -> MovieList? {
-		return await popular.getPopular(page: page)
+		let service = movieService as! PopularService
+		return await service.getPopular(page: page)
 	}
 }

@@ -28,6 +28,7 @@ class MovieVC: UITableViewController {
     }
 	
 	private func setupUI() {
+		title = vm.movie?.title
 		movieTitle.text = vm.movie?.title
 		movieReleaseDate.text = vm.releaseDateString()
 		movieDescription.text = vm.movie?.overview

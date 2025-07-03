@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,11 +38,9 @@
 /* Begin PBXFrameworksBuildPhase section */
 		68F5AC7F2DF6B4540028F800 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				68F5AD352DF6D0550028F800 /* Kingfisher in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -76,8 +74,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			fileSystemSynchronizedGroups = (
 				68F5AC842DF6B4540028F800 /* SwiftMovieDB */,
 			);
@@ -97,7 +93,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					68F5AC812DF6B4540028F800 = {
 						CreatedOnToolsVersion = 16.4;
@@ -116,7 +112,7 @@
 			packageReferences = (
 				68F5AD332DF6D0550028F800 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = 68F5AC832DF6B4540028F800 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -129,25 +125,21 @@
 /* Begin PBXResourcesBuildPhase section */
 		68F5AC802DF6B4540028F800 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		68F5AC7E2DF6B4540028F800 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		68F5AC962DF6B4550028F800 /* Debug */ = {
+		68F5AC962DF6B4550028F800 /* Debug configuration for PBXNativeTarget "SwiftMovieDB" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -157,6 +149,7 @@
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -180,7 +173,7 @@
 			};
 			name = Debug;
 		};
-		68F5AC972DF6B4550028F800 /* Release */ = {
+		68F5AC972DF6B4550028F800 /* Release configuration for PBXNativeTarget "SwiftMovieDB" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -190,6 +183,7 @@
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -213,7 +207,7 @@
 			};
 			name = Release;
 		};
-		68F5AC982DF6B4550028F800 /* Debug */ = {
+		68F5AC982DF6B4550028F800 /* Debug configuration for PBXProject "SwiftMovieDB" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -272,12 +266,13 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		68F5AC992DF6B4550028F800 /* Release */ = {
+		68F5AC992DF6B4550028F800 /* Release configuration for PBXProject "SwiftMovieDB" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -329,6 +324,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -340,19 +336,17 @@
 		68F5AC7D2DF6B4540028F800 /* Build configuration list for PBXProject "SwiftMovieDB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				68F5AC982DF6B4550028F800 /* Debug */,
-				68F5AC992DF6B4550028F800 /* Release */,
+				68F5AC982DF6B4550028F800 /* Debug configuration for PBXProject "SwiftMovieDB" */,
+				68F5AC992DF6B4550028F800 /* Release configuration for PBXProject "SwiftMovieDB" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		68F5AC952DF6B4550028F800 /* Build configuration list for PBXNativeTarget "SwiftMovieDB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				68F5AC962DF6B4550028F800 /* Debug */,
-				68F5AC972DF6B4550028F800 /* Release */,
+				68F5AC962DF6B4550028F800 /* Debug configuration for PBXNativeTarget "SwiftMovieDB" */,
+				68F5AC972DF6B4550028F800 /* Release configuration for PBXNativeTarget "SwiftMovieDB" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

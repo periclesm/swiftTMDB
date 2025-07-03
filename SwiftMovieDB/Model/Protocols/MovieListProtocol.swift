@@ -18,7 +18,7 @@ protocol MovieListProtocol {
  The following extension is to make protocol functions optional.
  Two choices here:
  a) either uncomment the following and add the necessary protocol functions manually (warning: mistakes can easily be made) or
- b) leave the extension commented and add all 3 stubs where needed. Return [] where the function is not necessary. (mistakes averted this way)
+ b) leave the extension commented and add all 3 stubs in all classes conforming to the protocol. Return [] where the function is not necessary. (mistakes averted this way)
  */
 
 //extension MovieListProtocol {
