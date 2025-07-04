@@ -7,20 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68066C602E184A27009C91D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68066C5C2E184A27009C91D3 /* Kingfisher */; };
 		68F5AD352DF6D0550028F800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68F5AD342DF6D0550028F800 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		68F5AC822DF6B4540028F800 /* SwiftMovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftMovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		68066C652E184A27009C91D3 /* SwiftMovieDB SUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftMovieDB SUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		68F5AC822DF6B4540028F800 /* SwiftMovieDB UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftMovieDB UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		68F5AC942DF6B4550028F800 /* Exceptions for "SwiftMovieDB" folder in "SwiftMovieDB" target */ = {
+		68066C662E184A27009C91D3 /* Exceptions for "SwiftMovieDB" folder in "SwiftMovieDB SUI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"/Localized: View/UIKit/Storyboards/LaunchScreen.storyboard",
+				"/Localized: View/UIKit/Storyboards/Main.storyboard",
+				AppDelegate.swift,
+				Info.plist,
+				InfoSUI.plist,
+				SceneDelegate.swift,
+				View/UIKit/Components/MovieCell.swift,
+				View/UIKit/Components/UIBackgroundedButton.swift,
+				View/UIKit/Detail/MovieVC.swift,
+				View/UIKit/Detail/MovieVM.swift,
+				View/UIKit/MainVC.swift,
+				View/UIKit/MovieListVC.swift,
+				View/UIKit/MovieViewModel.swift,
+			);
+			target = 68066C5B2E184A27009C91D3 /* SwiftMovieDB SUI */;
+		};
+		68F5AC942DF6B4550028F800 /* Exceptions for "SwiftMovieDB" folder in "SwiftMovieDB UIKit" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
+				InfoSUI.plist,
+				SwiftMovieDB.swift,
+				View/SwiftUI/MainView.swift,
 			);
-			target = 68F5AC812DF6B4540028F800 /* SwiftMovieDB */;
+			target = 68F5AC812DF6B4540028F800 /* SwiftMovieDB UIKit */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -28,7 +52,8 @@
 		68F5AC842DF6B4540028F800 /* SwiftMovieDB */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				68F5AC942DF6B4550028F800 /* Exceptions for "SwiftMovieDB" folder in "SwiftMovieDB" target */,
+				68F5AC942DF6B4550028F800 /* Exceptions for "SwiftMovieDB" folder in "SwiftMovieDB UIKit" target */,
+				68066C662E184A27009C91D3 /* Exceptions for "SwiftMovieDB" folder in "SwiftMovieDB SUI" target */,
 			);
 			path = SwiftMovieDB;
 			sourceTree = "<group>";
@@ -36,6 +61,12 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		68066C5F2E184A27009C91D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			files = (
+				68066C602E184A27009C91D3 /* Kingfisher in Frameworks */,
+			);
+		};
 		68F5AC7F2DF6B4540028F800 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
@@ -56,7 +87,8 @@
 		68F5AC832DF6B4540028F800 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				68F5AC822DF6B4540028F800 /* SwiftMovieDB.app */,
+				68F5AC822DF6B4540028F800 /* SwiftMovieDB UIKit.app */,
+				68066C652E184A27009C91D3 /* SwiftMovieDB SUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,9 +96,30 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		68F5AC812DF6B4540028F800 /* SwiftMovieDB */ = {
+		68066C5B2E184A27009C91D3 /* SwiftMovieDB SUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 68F5AC952DF6B4550028F800 /* Build configuration list for PBXNativeTarget "SwiftMovieDB" */;
+			buildConfigurationList = 68066C622E184A27009C91D3 /* Build configuration list for PBXNativeTarget "SwiftMovieDB SUI" */;
+			buildPhases = (
+				68066C5E2E184A27009C91D3 /* Sources */,
+				68066C5F2E184A27009C91D3 /* Frameworks */,
+				68066C612E184A27009C91D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			fileSystemSynchronizedGroups = (
+				68F5AC842DF6B4540028F800 /* SwiftMovieDB */,
+			);
+			name = "SwiftMovieDB SUI";
+			packageProductDependencies = (
+				68066C5C2E184A27009C91D3 /* Kingfisher */,
+			);
+			productName = SwiftMovieDB;
+			productReference = 68066C652E184A27009C91D3 /* SwiftMovieDB SUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+		68F5AC812DF6B4540028F800 /* SwiftMovieDB UIKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 68F5AC952DF6B4550028F800 /* Build configuration list for PBXNativeTarget "SwiftMovieDB UIKit" */;
 			buildPhases = (
 				68F5AC7E2DF6B4540028F800 /* Sources */,
 				68F5AC7F2DF6B4540028F800 /* Frameworks */,
@@ -77,12 +130,12 @@
 			fileSystemSynchronizedGroups = (
 				68F5AC842DF6B4540028F800 /* SwiftMovieDB */,
 			);
-			name = SwiftMovieDB;
+			name = "SwiftMovieDB UIKit";
 			packageProductDependencies = (
 				68F5AD342DF6D0550028F800 /* Kingfisher */,
 			);
 			productName = SwiftMovieDB;
-			productReference = 68F5AC822DF6B4540028F800 /* SwiftMovieDB.app */;
+			productReference = 68F5AC822DF6B4540028F800 /* SwiftMovieDB UIKit.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -117,12 +170,18 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				68F5AC812DF6B4540028F800 /* SwiftMovieDB */,
+				68F5AC812DF6B4540028F800 /* SwiftMovieDB UIKit */,
+				68066C5B2E184A27009C91D3 /* SwiftMovieDB SUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		68066C612E184A27009C91D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			files = (
+			);
+		};
 		68F5AC802DF6B4540028F800 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
@@ -131,6 +190,11 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		68066C5E2E184A27009C91D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			files = (
+			);
+		};
 		68F5AC7E2DF6B4540028F800 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
@@ -139,7 +203,75 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		68F5AC962DF6B4550028F800 /* Debug configuration for PBXNativeTarget "SwiftMovieDB" */ = {
+		68066C632E184A27009C91D3 /* Debug configuration for PBXNativeTarget "SwiftMovieDB SUI" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AFNBPBD3C5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftMovieDB/InfoSUI.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "MovieDB SUI";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = net.cloudfields.SwiftMovieDB.sui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		68066C642E184A27009C91D3 /* Release configuration for PBXNativeTarget "SwiftMovieDB SUI" */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = AFNBPBD3C5;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SwiftMovieDB/InfoSUI.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "MovieDB SUI";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = net.cloudfields.SwiftMovieDB.sui;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		68F5AC962DF6B4550028F800 /* Debug configuration for PBXNativeTarget "SwiftMovieDB UIKit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -149,6 +281,7 @@
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "MovieDB UIKit";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -173,7 +306,7 @@
 			};
 			name = Debug;
 		};
-		68F5AC972DF6B4550028F800 /* Release configuration for PBXNativeTarget "SwiftMovieDB" */ = {
+		68F5AC972DF6B4550028F800 /* Release configuration for PBXNativeTarget "SwiftMovieDB UIKit" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -183,6 +316,7 @@
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "MovieDB UIKit";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -333,6 +467,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		68066C622E184A27009C91D3 /* Build configuration list for PBXNativeTarget "SwiftMovieDB SUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68066C632E184A27009C91D3 /* Debug configuration for PBXNativeTarget "SwiftMovieDB SUI" */,
+				68066C642E184A27009C91D3 /* Release configuration for PBXNativeTarget "SwiftMovieDB SUI" */,
+			);
+			defaultConfigurationName = Release;
+		};
 		68F5AC7D2DF6B4540028F800 /* Build configuration list for PBXProject "SwiftMovieDB" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -341,17 +483,25 @@
 			);
 			defaultConfigurationName = Release;
 		};
-		68F5AC952DF6B4550028F800 /* Build configuration list for PBXNativeTarget "SwiftMovieDB" */ = {
+		68F5AC952DF6B4550028F800 /* Build configuration list for PBXNativeTarget "SwiftMovieDB UIKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				68F5AC962DF6B4550028F800 /* Debug configuration for PBXNativeTarget "SwiftMovieDB" */,
-				68F5AC972DF6B4550028F800 /* Release configuration for PBXNativeTarget "SwiftMovieDB" */,
+				68F5AC962DF6B4550028F800 /* Debug configuration for PBXNativeTarget "SwiftMovieDB UIKit" */,
+				68F5AC972DF6B4550028F800 /* Release configuration for PBXNativeTarget "SwiftMovieDB UIKit" */,
 			);
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		68066C5D2E184A27009C91D3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
 		68F5AD332DF6D0550028F800 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -363,6 +513,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		68066C5C2E184A27009C91D3 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68066C5D2E184A27009C91D3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		68F5AD342DF6D0550028F800 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 68F5AD332DF6D0550028F800 /* XCRemoteSwiftPackageReference "Kingfisher" */;
