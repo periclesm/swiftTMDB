@@ -1,21 +1,18 @@
 //
-//  SearchVM.swift
+//  MovieListVM.swift
 //  SwiftMovieDB
 //
-//  Created by Pericles Maravelakis on 9/6/25.
+//  Created by Pericles Maravelakis on 2/7/25.
 //
 
-import UIKit
+import Foundation
 
-enum MoviesMode {
-	case search, top, upcoming, popular
-}
-
-class SearchVM: NSObject {
+class MovieViewModel: NSObject {
 	
 	private let service: MoviesService
 	
-	var mode: MoviesMode = .search
+	///Fallback closure on View Controller to update data on tableview.
+	var onDataUpdate: (() -> Void)?
 	
 	///Dataset for all movies to be displayed. THis may contain search movie results, top-rated movies etc.
 	private(set) var movies: MovieDataType = []
@@ -29,12 +26,11 @@ class SearchVM: NSObject {
 	///Total number of results (movies) as returned by TMDB.
 	var totalResults = 0
 	
-	///Fallback closure on View Controller to update data on tableview.
-	var onDataUpdate: (() -> Void)?
-	
-	init(service: MoviesService) {
+	init(_ service: MoviesService) {
 		self.service = service
 	}
+	
+	//MARK: - Data Functions
 	
 	///Clears all data from datastore and resets counters.
 	func clearData() {
@@ -44,18 +40,15 @@ class SearchVM: NSObject {
 		totalResults = 0
 	}
 	
-	
 	///Performs the search with the given term.
 	@MainActor
 	func search(searchTerm: String?) async {
 		guard let searchTerm else {
-			assert(true, "OK listen! Although searchTerm is optional, make sure not to call this func when it's empty or nil, right?")
+			assert(true, "OK listen! Although searchTerm is optional, make sure not to call this func when it's empty or nil, OK?")
 			return
 		}
 		
 		if !searchTerm.isEmpty {
-			mode = .search
-			
 			debugPrint("Searching for \(searchTerm) on page \(currentPage)...")
 			let data = await service.searchMovies(searchTerm: searchTerm, page: currentPage)
 			/**
@@ -73,11 +66,30 @@ class SearchVM: NSObject {
 		}
 	}
 	
+	@MainActor
+	func fetchData(for service: ServiceMode) async {
+		switch service {
+			case .top:
+				await top()
+				
+			case .upcoming:
+				await upcoming()
+				
+			case .popular:
+				await popular()
+				
+			case .search:
+				//no need to fetch data at start here
+				break
+				
+			@unknown default:
+				fatalError("Unknown service mode!")
+		}
+	}
+	
 	///Returns the Top-Voted movies from TMDB.
 	@MainActor
 	func top() async {
-		mode = .top
-		
 		let data = await service.getTopRated(page: currentPage)
 		if let movieData = data?.results {
 			totalPages = data?.totalPages ?? 0
@@ -93,8 +105,6 @@ class SearchVM: NSObject {
 	///Returns upcoming movies from TMDB.
 	@MainActor
 	func upcoming() async {
-		mode = .upcoming
-		
 		let data = await service.getUpcoming(page: currentPage)
 		if let movieData = data?.results {
 			totalPages = data?.totalPages ?? 0
@@ -110,8 +120,6 @@ class SearchVM: NSObject {
 	///Returns popular movies.
 	@MainActor
 	func popular() async {
-		mode = .popular
-		
 		let data = await service.getPopular(page: currentPage)
 		if let movieData = data?.results {
 			totalPages = data?.totalPages ?? 0

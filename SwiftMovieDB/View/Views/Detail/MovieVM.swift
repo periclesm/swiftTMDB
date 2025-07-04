@@ -8,7 +8,7 @@
 import UIKit
 
 /*
- Practically speaking, this VM serves only as datastore of a single movie (the one user selected) and its data transformation functions.
+ Practically speaking, this VM serves only as datastore for a single movie (the one user selected) and its data transformation functions.
  */
 class MovieVM: NSObject {
 		
