@@ -17,9 +17,7 @@ struct MainView: View {
 				Spacer()
 				
 				//Top Movies Button
-				Button(action: {
-					print("top")
-				}) {
+				NavigationLink(destination: MovieListView(mode: .top)) {
 					ZStack {
 						Image("topmovies")
 							.resizable()
@@ -37,9 +35,7 @@ struct MainView: View {
 				.clipShape(RoundedRectangle(cornerRadius: 16))
 				
 				//Coming Soon Button
-				Button(action: {
-					print("upcoming")
-				}) {
+				NavigationLink(destination: MovieListView(mode: .upcoming)) {
 					ZStack {
 						Image("comingsoon")
 							.resizable()
@@ -57,9 +53,7 @@ struct MainView: View {
 				.clipShape(RoundedRectangle(cornerRadius: 16))
 				
 				//Popular Movies Button
-				Button(action: {
-					print("popular")
-				}) {
+				NavigationLink(destination: MovieListView(mode: .popular)) {
 					ZStack {
 						Image("popular")
 							.resizable()
@@ -71,16 +65,13 @@ struct MainView: View {
 							.font(.system(size: 30, weight: .bold))
 							.foregroundColor(.white)
 							.shadow(color: .mint, radius: 1, x: 2, y: 3)
-
 					}
 				}
 				.frame(width: buttonWidth, height: buttonHeight, alignment: .center)
 				.clipShape(RoundedRectangle(cornerRadius: 16))
 				
 				//Search Button
-				Button(action: {
-					print("Search")
-				}) {
+				NavigationLink(destination: MovieListView(mode: .search)) {
 					ZStack {
 						Image("search")
 							.resizable()
@@ -100,7 +91,7 @@ struct MainView: View {
 			}
 			.padding(.bottom, 20)
 			.navigationTitle("the Movie Database")
-			.navigationBarTitleDisplayMode(.large) // ✅ this makes it large
+			.navigationBarTitleDisplayMode(.large)
 		}
 	}
 }

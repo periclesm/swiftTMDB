@@ -32,7 +32,6 @@
 				View/UIKit/Detail/MovieVM.swift,
 				View/UIKit/MainVC.swift,
 				View/UIKit/MovieListVC.swift,
-				View/UIKit/MovieViewModel.swift,
 			);
 			target = 68066C5B2E184A27009C91D3 /* SwiftMovieDB SUI */;
 		};
@@ -277,11 +276,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "MovieDB UIKit";
+				INFOPLIST_KEY_CFBundleDisplayName = MovieDB;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -312,11 +311,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "MovieDB UIKit";
+				INFOPLIST_KEY_CFBundleDisplayName = MovieDB;
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
