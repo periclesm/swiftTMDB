@@ -11,7 +11,7 @@ typealias MovieDataType = Array<Movie>
 
 struct Movie: Codable, Identifiable {
 	var id: Int
-	var title: String?
+	var title: String
 	var overview: String?
 	var releaseDate: String?
 	var posterPath: String?

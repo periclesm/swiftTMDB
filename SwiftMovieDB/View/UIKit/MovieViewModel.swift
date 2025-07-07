@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieViewModel: NSObject {
+class MovieViewModel: NSObject, ObservableObject {
 	
 	private let service: MoviesService
 	
@@ -15,7 +15,7 @@ class MovieViewModel: NSObject {
 	var onDataUpdate: (() -> Void)?
 	
 	///Dataset for all movies to be displayed. THis may contain search movie results, top-rated movies etc.
-	private(set) var movies: MovieDataType = []
+	@Published private(set) var movies: MovieDataType = []
 	
 	///The current page index.
 	var currentPage = 1

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68066C602E184A27009C91D3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68066C5C2E184A27009C91D3 /* Kingfisher */; };
 		68F5AD352DF6D0550028F800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68F5AD342DF6D0550028F800 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +25,7 @@
 				Info.plist,
 				InfoSUI.plist,
 				SceneDelegate.swift,
+				System/ImageManager.swift,
 				View/UIKit/Components/MovieCell.swift,
 				View/UIKit/Components/UIBackgroundedButton.swift,
 				View/UIKit/Detail/MovieVC.swift,
@@ -42,6 +42,7 @@
 				InfoSUI.plist,
 				SwiftMovieDB.swift,
 				View/SwiftUI/MainView.swift,
+				View/SwiftUI/MovieListView.swift,
 			);
 			target = 68F5AC812DF6B4540028F800 /* SwiftMovieDB UIKit */;
 		};
@@ -63,7 +64,6 @@
 		68066C5F2E184A27009C91D3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
-				68066C602E184A27009C91D3 /* Kingfisher in Frameworks */,
 			);
 		};
 		68F5AC7F2DF6B4540028F800 /* Frameworks */ = {
@@ -109,9 +109,6 @@
 				68F5AC842DF6B4540028F800 /* SwiftMovieDB */,
 			);
 			name = "SwiftMovieDB SUI";
-			packageProductDependencies = (
-				68066C5C2E184A27009C91D3 /* Kingfisher */,
-			);
 			productName = SwiftMovieDB;
 			productReference = 68066C652E184A27009C91D3 /* SwiftMovieDB SUI.app */;
 			productType = "com.apple.product-type.application";
@@ -493,14 +490,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		68066C5D2E184A27009C91D3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.3.2;
-			};
-		};
 		68F5AD332DF6D0550028F800 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -512,11 +501,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		68066C5C2E184A27009C91D3 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 68066C5D2E184A27009C91D3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
 		68F5AD342DF6D0550028F800 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 68F5AD332DF6D0550028F800 /* XCRemoteSwiftPackageReference "Kingfisher" */;

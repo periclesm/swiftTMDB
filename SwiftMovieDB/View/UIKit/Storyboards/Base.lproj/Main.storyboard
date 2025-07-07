@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MFf-ut-eYe">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24093.8" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MFf-ut-eYe">
     <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24053.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,7 +13,7 @@
             <objects>
                 <navigationController id="MFf-ut-eYe" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="8rU-hW-SjF">
-                        <rect key="frame" x="0.0" y="124" width="402" height="96"/>
+                        <rect key="frame" x="0.0" y="124" width="402" height="106"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -27,7 +27,7 @@
         <!--Main-->
         <scene sceneID="Jmb-d4-vo0">
             <objects>
-                <viewController storyboardIdentifier="MainVC" title="Main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="93W-YD-i3l" customClass="MainVC" customModule="SwiftMovieDB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainVC" title="Main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="93W-YD-i3l" customClass="MainVC" customModule="SwiftMovieDB_UIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vLx-I9-aqi">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,7 +35,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BQF-xu-ESu">
                                 <rect key="frame" x="20" y="291.33333333333326" width="362" height="510"/>
                                 <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SjZ-8Y-GkQ" customClass="UIBackgroundedButton" customModule="SwiftMovieDB" customModuleProvider="target">
+                                    <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SjZ-8Y-GkQ" customClass="UIBackgroundedButton" customModule="SwiftMovieDB_UIKit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="362" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="120" id="d1I-84-jku"/>
@@ -56,7 +56,7 @@
                                             <action selector="topMoviesAction" destination="93W-YD-i3l" eventType="touchUpInside" id="XAc-js-cp7"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5W-vu-Eal" customClass="UIBackgroundedButton" customModule="SwiftMovieDB" customModuleProvider="target">
+                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n5W-vu-Eal" customClass="UIBackgroundedButton" customModule="SwiftMovieDB_UIKit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="130" width="362" height="120"/>
                                         <color key="tintColor" systemColor="systemOrangeColor"/>
                                         <state key="normal" title="Button"/>
@@ -74,7 +74,7 @@
                                             <action selector="upcomingMoviesAction" destination="93W-YD-i3l" eventType="touchUpInside" id="Y2Y-OX-sUL"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plK-pe-j9v" customClass="UIBackgroundedButton" customModule="SwiftMovieDB" customModuleProvider="target">
+                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plK-pe-j9v" customClass="UIBackgroundedButton" customModule="SwiftMovieDB_UIKit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="260.00000000000006" width="362" height="120"/>
                                         <color key="tintColor" systemColor="systemGreenColor"/>
                                         <state key="normal" title="Button"/>
@@ -92,7 +92,7 @@
                                             <action selector="popularMoviesAction" destination="93W-YD-i3l" eventType="touchUpInside" id="lRM-U4-fdb"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnU-bG-loF" customClass="UIBackgroundedButton" customModule="SwiftMovieDB" customModuleProvider="target">
+                                    <button opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BnU-bG-loF" customClass="UIBackgroundedButton" customModule="SwiftMovieDB_UIKit" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="390.00000000000006" width="362" height="120"/>
                                         <color key="tintColor" systemColor="systemBlueColor"/>
                                         <state key="normal" title="Button"/>
@@ -138,24 +138,24 @@
         <!--Movie List-->
         <scene sceneID="i6n-rF-gxs">
             <objects>
-                <tableViewController storyboardIdentifier="MovieListVC" title="Movie List" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cw7-hP-9mP" customClass="MovieListVC" customModule="SwiftMovieDB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MovieListVC" title="Movie List" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cw7-hP-9mP" customClass="MovieListVC" customModule="SwiftMovieDB_UIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="20" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="4DR-0Z-RXi">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="movieCell" id="Lei-pU-YCJ" customClass="MovieCell" customModule="SwiftMovieDB" customModuleProvider="target">
-                                <rect key="frame" x="20" y="38" width="362" height="120.33333587646484"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="movieCell" id="Lei-pU-YCJ" customClass="MovieCell" customModule="SwiftMovieDB_UIKit" customModuleProvider="target">
+                                <rect key="frame" x="20" y="38" width="362" height="121"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lei-pU-YCJ" id="R4e-sF-IiV">
-                                    <rect key="frame" x="0.0" y="0.0" width="331.66666666666669" height="120.33333587646484"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="331.66666666666669" height="121"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="9un-EG-ztY">
-                                            <rect key="frame" x="15" y="15" width="301.66666666666669" height="90.333333333333329"/>
+                                            <rect key="frame" x="15" y="15" width="301.66666666666669" height="91"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TMDB_poster" translatesAutoresizingMaskIntoConstraints="NO" id="FfK-tV-57b">
-                                                    <rect key="frame" x="0.0" y="0.3333333333333357" width="60" height="90"/>
+                                                    <rect key="frame" x="0.0" y="0.6666666666666643" width="60" height="90"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="FfK-tV-57b" secondAttribute="height" multiplier="2:3" id="lW7-lL-Lm7"/>
                                                         <constraint firstAttribute="height" constant="90" id="mqR-Nj-Vjd"/>
@@ -167,7 +167,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="o2B-QW-U8h">
-                                                    <rect key="frame" x="74.999999999999986" y="16.000000000000004" width="226.66666666666663" height="58.333333333333343"/>
+                                                    <rect key="frame" x="74.999999999999986" y="16.333333333333332" width="226.66666666666663" height="58.333333333333343"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Movie Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w3S-xZ-RM4">
                                                             <rect key="frame" x="0.0" y="0.0" width="93.333333333333329" height="21.666666666666668"/>
@@ -176,7 +176,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genres" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJO-yL-rOE">
-                                                            <rect key="frame" x="0.0" y="23.666666666666664" width="44.333333333333336" height="17"/>
+                                                            <rect key="frame" x="0.0" y="23.666666666666671" width="44.333333333333336" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -234,9 +234,9 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="TcT-u5-rRy">
                             <rect key="frame" x="123.66666666666667" y="106.66666666666667" width="152.66666666666663" height="186.66666666666663"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="popcorn.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UOj-r1-DnU">
-                                    <rect key="frame" x="33.333333333333329" y="-6.6666666666666572" width="86" height="115"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="popcorn" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="UOj-r1-DnU">
+                                    <rect key="frame" x="34.666666666666664" y="-6" width="83.666666666666686" height="108"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" weight="thin">
                                         <fontDescription key="fontDescription" type="system" pointSize="80"/>
                                     </preferredSymbolConfiguration>
                                 </imageView>
@@ -266,7 +266,7 @@ Go on! Do a search!</string>
         <!--Movie Details-->
         <scene sceneID="Fbr-dY-b3B">
             <objects>
-                <tableViewController storyboardIdentifier="MovieVC" title="Movie Details" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AK9-bG-M6C" customClass="MovieVC" customModule="SwiftMovieDB" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MovieVC" title="Movie Details" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AK9-bG-M6C" customClass="MovieVC" customModule="SwiftMovieDB_UIKit" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="9aB-Fa-5EX" userLabel="Table View">
                         <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -283,7 +283,7 @@ Go on! Do a search!</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TMDB_backdrop" translatesAutoresizingMaskIntoConstraints="NO" id="OA0-X6-lgc">
-                                                    <rect key="frame" x="5" y="0.0" width="392" height="219"/>
+                                                    <rect key="frame" x="5" y="0.0" width="392" height="215"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                             <integer key="value" value="8"/>
@@ -364,14 +364,14 @@ Go on! Do a search!</string>
                             <tableViewSection headerTitle="Sypnosis" id="sJb-Wq-pB5">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="cAZ-Td-3mh" userLabel="Description Cell">
-                                        <rect key="frame" x="0.0" y="426.33333396911615" width="402" height="40"/>
+                                        <rect key="frame" x="0.0" y="426.33333396911621" width="402" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cAZ-Td-3mh" id="zQ6-md-7rO">
-                                            <rect key="frame" x="0.0" y="0.0" width="402" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="402" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBP-Dm-rUN">
-                                                    <rect key="frame" x="20" y="11" width="362" height="18"/>
+                                                    <rect key="frame" x="20" y="15" width="362" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -413,7 +413,7 @@ Go on! Do a search!</string>
     <resources>
         <image name="TMDB_backdrop" width="1805" height="1440"/>
         <image name="TMDB_poster" width="67" height="100"/>
-        <image name="popcorn.fill" catalog="system" width="98" height="128"/>
+        <image name="popcorn" catalog="system" width="103" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
