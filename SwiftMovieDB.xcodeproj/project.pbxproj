@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		684DFA582E1D577C002AEE22 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 684DFA572E1D577C002AEE22 /* Kingfisher */; };
 		68F5AD352DF6D0550028F800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68F5AD342DF6D0550028F800 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		68066C5F2E184A27009C91D3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
+				684DFA582E1D577C002AEE22 /* Kingfisher in Frameworks */,
 			);
 		};
 		68F5AC7F2DF6B4540028F800 /* Frameworks */ = {
@@ -75,10 +77,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		684DFA562E1D577C002AEE22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		68F5AC792DF6B4540028F800 = {
 			isa = PBXGroup;
 			children = (
 				68F5AC842DF6B4540028F800 /* SwiftMovieDB */,
+				684DFA562E1D577C002AEE22 /* Frameworks */,
 				68F5AC832DF6B4540028F800 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,6 +119,9 @@
 				68F5AC842DF6B4540028F800 /* SwiftMovieDB */,
 			);
 			name = "SwiftMovieDB SUI";
+			packageProductDependencies = (
+				684DFA572E1D577C002AEE22 /* Kingfisher */,
+			);
 			productName = SwiftMovieDB;
 			productReference = 68066C652E184A27009C91D3 /* SwiftMovieDB SUI.app */;
 			productType = "com.apple.product-type.application";
@@ -501,6 +514,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		684DFA572E1D577C002AEE22 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 68F5AD332DF6D0550028F800 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		68F5AD342DF6D0550028F800 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 68F5AD332DF6D0550028F800 /* XCRemoteSwiftPackageReference "Kingfisher" */;

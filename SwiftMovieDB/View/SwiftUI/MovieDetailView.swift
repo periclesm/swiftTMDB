@@ -6,112 +6,82 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MovieDetailView: View {
 	var movie: Movie?
-	@State private var posterLoaded = false
-	@State private var backdropLoaded = false
+	@State private var posterLoading = true
+	@State private var backdropLoading = true
+	
+	var title: String {
+		movie?.title ?? "Movie"
+	}
 	
 	var body: some View {
 		VStack(alignment: .leading, spacing: 20) {
 			
 			//Top Backdrop
-			AsyncImage(url: posterURL(for: movie?.backdropPath)) { phase in
-				switch phase {
-					case .empty:
-						ZStack {
-							Image("TMDB_backdrop")
-								.resizable()
-								.scaledToFill()
-								.frame(maxWidth: .infinity, maxHeight: 220)
-								.aspectRatio(16/9, contentMode: .fit)
-								.cornerRadius(8)
-								.clipped()
-							ProgressView()
-								.progressViewStyle(CircularProgressViewStyle(tint: .white))
-								.scaleEffect(1.5)
-						}
-						
-					case .success(let image):
-						image
-							.resizable()
-							.scaledToFill()
-							.frame(maxWidth: .infinity, maxHeight: 220)
-							.aspectRatio(16/9, contentMode: .fit)
-							.cornerRadius(8)
-							.clipped()
-							.opacity(backdropLoaded ? 1 : 0)
-							.onAppear {
-								withAnimation(.easeInOut(duration: 0.75)) {
-									backdropLoaded = true
-								}
-							}
-						
-					case .failure(_):
-						//set an error here
+			ZStack {
+				KFImage(posterURL(for: movie?.backdropPath))
+					.placeholder {
 						Image("TMDB_backdrop")
 							.resizable()
 							.scaledToFill()
-							.frame(maxWidth: .infinity, maxHeight: 220)
-							.aspectRatio(16/9, contentMode: .fit)
 							.cornerRadius(8)
-							.clipped()
-						
-					@unknown default:
-						Image("TMDB_backdrop")
-							.resizable()
-							.scaledToFill()
-							.frame(maxWidth: .infinity, maxHeight: 220)
-							.aspectRatio(16/9, contentMode: .fit)
-							.cornerRadius(8)
-							.clipped()
+					}
+					.cacheOriginalImage()
+					.waitForCache()
+					.fade(duration: 0.5)
+					.scaleFactor(UIScreen.main.scale)
+					.loadDiskFileSynchronously()
+					.onSuccess({ _ in backdropLoading = false })
+					.onFailure { error in
+						debugPrint("Error: \(error)")
+						backdropLoading = false
+					}
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(maxWidth: .infinity, maxHeight: 220)
+					.cornerRadius(8)
+					.clipped()
+				
+				if backdropLoading {
+					ProgressView()
+						.progressViewStyle(CircularProgressViewStyle(tint: .primary))
+						.scaleEffect(1.5)
 				}
 			}
-			
+						
 			HStack(alignment: .center, spacing: 10) {
 				
 				//Movie poster
-				AsyncImage(url: posterURL(for: movie?.posterPath)) { phase in
-					switch phase {
-						case .empty:
-							ZStack {
-								Image("TMDB_poster")
-									.resizable()
-									.scaledToFill()
-									.frame(width: 80, height: 120)
-									.cornerRadius(8)
-								ProgressView()
-									.progressViewStyle(CircularProgressViewStyle(tint: .white))
-							}
-							
-						case .success(let image):
-							image
-								.resizable()
-								.scaledToFill()
-								.frame(width: 80, height: 120)
-								.clipped()
-								.cornerRadius(8)
-								.opacity(posterLoaded ? 1 : 0)
-								.onAppear {
-									withAnimation(.easeInOut(duration: 0.75)) {
-										posterLoaded = true
-									}
-								}
-							
-						case .failure(_):
-							//set an error here
+				ZStack {
+					KFImage(posterURL(for: movie?.posterPath))
+						.placeholder {
 							Image("TMDB_poster")
 								.resizable()
 								.scaledToFill()
-								.frame(width: 80, height: 120)
 								.cornerRadius(8)
-							
-						@unknown default:
-							Image("TMDB_poster")
-								.resizable()
-								.scaledToFill()
-								.frame(width: 80, height: 120)
-								.cornerRadius(4)
+						}
+						.cacheOriginalImage()
+						.waitForCache()
+						.fade(duration: 0.5)
+						.scaleFactor(UIScreen.main.scale)
+						.loadDiskFileSynchronously()
+						.onSuccess{ _ in posterLoading = false }
+						.onFailure { error in
+							posterLoading = false
+							debugPrint("Error: \(error)")
+						}
+						.resizable()
+						.aspectRatio(contentMode: .fill)
+						.frame(maxWidth: 80, maxHeight: 120)
+						.cornerRadius(8)
+						.clipped()
+					
+					if posterLoading {
+						ProgressView()
+							.progressViewStyle(CircularProgressViewStyle(tint: .white))
 					}
 				}
 				
@@ -124,6 +94,7 @@ struct MovieDetailView: View {
 						.font(.system(size: 13))
 				}
 			}
+			.padding(.horizontal, 5)
 			
 			VStack(alignment: .leading, spacing: 20) {
 				Text("Overview".uppercased())
@@ -140,10 +111,11 @@ struct MovieDetailView: View {
 		}
 		.padding(.horizontal, 5)
 		.padding(.top, 30)
-		.navigationTitle("\(movie?.title ?? "Movie Title")")
+		.navigationTitle(title)
 		.navigationBarTitleDisplayMode(.inline)
 	}
 	
+	//MARK: - Functions
 	private func releaseDateString() -> String {
 		let formattedDate = MDDate.shared.convertDateFormat(inputString: self.movie?.releaseDate, fromFormat: .original, toFormat: .formatted)
 		return "Release Date: \(formattedDate)"

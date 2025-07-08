@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MovieListView: View {
-	var mode: ServiceMode
 	
+	var mode: ServiceMode
 	@StateObject private var vm: MovieViewModel
 	@State private var posterLoaded = false
+	@State private var searchText: String = ""
 	@State private var selectedMovie: Movie?
 	
 	init(mode: ServiceMode) {
@@ -22,22 +24,10 @@ struct MovieListView: View {
 	
 	var body: some View {
 		VStack {
-			if vm.movies.isEmpty {
-				Spacer()
-				VStack(spacing: 30) {
-					Image(systemName: "popcorn")
-						.resizable()
-						.scaledToFit()
-						.frame(width: 150, height: 150)
-						.font(.system(size: 10, weight: .thin))
-					Text(noItemsText())
-						.font(.system(size: 20))
-						.multilineTextAlignment(.center)
-				}
-				Spacer()
-			} else {
-				List {
-					Section(header: Text(titleForHeader())) {
+			List {
+				Section(header: Text(titleForHeader())
+					.font(.system(size: 13))
+					.foregroundColor(.gray)) {
 						ForEach(vm.movies.indices, id: \.self) { index in
 							let movie = vm.movies[index]
 							
@@ -50,16 +40,34 @@ struct MovieListView: View {
 						}
 						.padding(.vertical, 6)
 					}
-				}
-				.navigationTitle(viewTitle())
-				.navigationBarTitleDisplayMode(.large)
-				.navigationDestination(item: $selectedMovie) { movie in
-					MovieDetailView(movie: movie)
-				}
 			}
-			
+			.listStyle(.insetGrouped)
+			.navigationTitle(viewTitle())
+			.navigationBarTitleDisplayMode(.large)
+			.navigationDestination(item: $selectedMovie) { movie in
+				MovieDetailView(movie: movie)
+			}
+			.if(mode == .search) { list in
+				list
+					.searchable(
+						text: $searchText,
+						placement: .navigationBarDrawer(displayMode: .always),
+						prompt: "Search the Movie Database..."
+					)
+					.onSubmit(of: .search) {
+						Task {
+							vm.clearData()
+							await vm.search(searchTerm: searchText)
+						}
+					}
+					.onChange(of: searchText) { oldValue, newValue in
+						if newValue.isEmpty {
+							vm.clearData()
+						}
+					}
+			}
 		}
-		.task {
+		.task(priority: .userInitiated) {
 			await vm.fetchData(for: mode)
 		}
 	}
@@ -76,16 +84,9 @@ struct MovieListView: View {
 	
 	private func titleForHeader() -> String {
 		if mode == .search {
-			return "Total: \(vm.totalResults) movies"
+			return vm.movies.isEmpty ? "No results. Try another search..." : "Total: \(vm.totalResults) movies"
 		} else {
 			return ""
-		}
-	}
-	
-	private func noItemsText() -> String {
-		switch mode {
-			case .search: return "WOOT?\nNo movies?\nGo on! Do a search!"
-			default: return "No movies"
 		}
 	}
 	
@@ -93,12 +94,10 @@ struct MovieListView: View {
 		if (index == vm.movies.count-3) && (vm.movies.count < vm.totalResults) {
 			vm.pageIncrement()
 			switch mode {
-				case .search: break
-					//					Task(priority: .userInitiated) {
-					//						if let searchTerm = searchController?.searchBar.text {
-					//							await vm.search(searchTerm: searchTerm)
-					//						}
-					//					}
+				case .search:
+					Task(priority: .userInitiated) {
+						await vm.search(searchTerm: searchText)
+					}
 					
 				case .upcoming:
 					Task(priority: .userInitiated) {
@@ -126,56 +125,91 @@ struct MovieListView: View {
 struct MovieItem: View {
 	let movie: Movie
 	let onSelect: (() -> Void)?
-	@State private var posterLoaded = false
+	@State private var posterLoading = true
 	
 	var body: some View {
 		Button(action: {
 			onSelect?() //Button action returns the annotation
 		}) {
 			HStack {
-				AsyncImage(url: posterURL(for: movie.posterPath)) { phase in
-					switch phase {
-						case .empty:
-							ZStack {
-								Image("TMDB_poster")
-									.resizable()
-									.scaledToFill()
-									.frame(width: 60, height: 90)
-									.cornerRadius(4)
-								ProgressView()
-									.progressViewStyle(CircularProgressViewStyle(tint: .white))
-							}
-							
-						case .success(let image):
-							image
-								.resizable()
-								.scaledToFill()
-								.frame(width: 60, height: 90)
-								.clipped()
-								.cornerRadius(4)
-								.opacity(posterLoaded ? 1 : 0)
-								.onAppear {
-									withAnimation(.easeInOut(duration: 0.75)) {
-										posterLoaded = true
-									}
-								}
-							
-						case .failure(_):
-							//set an error here
+				ZStack {
+					KFImage(posterURL(for: movie.posterPath))
+						.placeholder {
 							Image("TMDB_poster")
 								.resizable()
 								.scaledToFill()
-								.frame(width: 60, height: 90)
-								.cornerRadius(4)
-							
-						@unknown default:
-							Image("TMDB_poster")
-								.resizable()
-								.scaledToFill()
-								.frame(width: 60, height: 90)
-								.cornerRadius(4)
+								.cornerRadius(8)
+						}
+						.cacheOriginalImage()
+						.waitForCache()
+						.fade(duration: 0.5)
+						.scaleFactor(UIScreen.main.scale)
+						.loadDiskFileSynchronously()
+						.onSuccess{ _ in posterLoading = false }
+						.onFailure { error in
+							posterLoading = false
+							debugPrint("Error: \(error)")
+						}
+						.resizable()
+						.aspectRatio(contentMode: .fill)
+						.frame(maxWidth: 60, maxHeight: 90)
+						.cornerRadius(4)
+						.clipped()
+					
+					if posterLoading {
+						ProgressView()
+							.progressViewStyle(CircularProgressViewStyle(tint: .white))
 					}
 				}
+				
+				/*
+				 Just leaving AsyncImage here for reference and compariston with Kingfisher.
+				 Kingfisher is far superior (see caching? lol)
+				 */
+				
+//				AsyncImage(url: posterURL(for: movie.posterPath)) { phase in
+//					switch phase {
+//						case .empty:
+//							ZStack {
+//								Image("TMDB_poster")
+//									.resizable()
+//									.scaledToFill()
+//									.frame(width: 60, height: 90)
+//									.cornerRadius(4)
+//								ProgressView()
+//									.progressViewStyle(CircularProgressViewStyle(tint: .white))
+//							}
+//							
+//						case .success(let image):
+//							image
+//								.resizable()
+//								.scaledToFill()
+//								.frame(width: 60, height: 90)
+//								.clipped()
+//								.cornerRadius(4)
+//								.opacity(posterLoaded ? 1 : 0)
+//								.onAppear {
+//									withAnimation(.easeInOut(duration: 0.75)) {
+//										posterLoaded = true
+//									}
+//								}
+//							
+//						case .failure(_):
+//							//set an error here
+//							Image("TMDB_poster")
+//								.resizable()
+//								.scaledToFill()
+//								.frame(width: 60, height: 90)
+//								.cornerRadius(4)
+//							
+//						@unknown default:
+//							Image("TMDB_poster")
+//								.resizable()
+//								.scaledToFill()
+//								.frame(width: 60, height: 90)
+//								.cornerRadius(4)
+//					}
+//				}
 				
 				VStack(alignment: .leading, spacing: 4) {
 					Text(movie.title)
@@ -199,6 +233,17 @@ struct MovieItem: View {
 	private func posterURL(for posterPath: String?) -> URL? {
 		guard let posterPath else { return nil }
 		return DataAPI().getImageEndpoint(imagePath: posterPath, type: .poster)
+	}
+}
+
+extension View {
+	@ViewBuilder
+	func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+		if condition {
+			transform(self)
+		} else {
+			self
+		}
 	}
 }
 
