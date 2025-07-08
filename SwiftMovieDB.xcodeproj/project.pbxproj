@@ -19,7 +19,6 @@
 		68066C662E184A27009C91D3 /* Exceptions for "SwiftMovieDB" folder in "SwiftMovieDB SUI" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"/Localized: View/UIKit/Storyboards/LaunchScreen.storyboard",
 				"/Localized: View/UIKit/Storyboards/Main.storyboard",
 				AppDelegate.swift,
 				Info.plist,
@@ -42,6 +41,7 @@
 				InfoSUI.plist,
 				SwiftMovieDB.swift,
 				View/SwiftUI/MainView.swift,
+				View/SwiftUI/MovieDetailView.swift,
 				View/SwiftUI/MovieListView.swift,
 			);
 			target = 68F5AC812DF6B4540028F800 /* SwiftMovieDB UIKit */;

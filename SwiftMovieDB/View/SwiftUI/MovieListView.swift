@@ -11,6 +11,8 @@ struct MovieListView: View {
 	var mode: ServiceMode
 	
 	@StateObject private var vm: MovieViewModel
+	@State private var posterLoaded = false
+	@State private var selectedMovie: Movie?
 	
 	init(mode: ServiceMode) {
 		self.mode = mode
@@ -19,7 +21,7 @@ struct MovieListView: View {
 	}
 	
 	var body: some View {
-		NavigationStack {
+		VStack {
 			if vm.movies.isEmpty {
 				Spacer()
 				VStack(spacing: 30) {
@@ -40,19 +42,22 @@ struct MovieListView: View {
 							let movie = vm.movies[index]
 							
 							MovieItem(movie: movie, onSelect: {
-								//do stuff here
+								selectedMovie = movie
 							})
 							.onAppear {
 								fetchNextItems(at: index)
 							}
 						}
 						.padding(.vertical, 6)
-						
 					}
 				}
 				.navigationTitle(viewTitle())
 				.navigationBarTitleDisplayMode(.large)
+				.navigationDestination(item: $selectedMovie) { movie in
+					MovieDetailView(movie: movie)
+				}
 			}
+			
 		}
 		.task {
 			await vm.fetchData(for: mode)
@@ -89,11 +94,11 @@ struct MovieListView: View {
 			vm.pageIncrement()
 			switch mode {
 				case .search: break
-//					Task(priority: .userInitiated) {
-//						if let searchTerm = searchController?.searchBar.text {
-//							await vm.search(searchTerm: searchTerm)
-//						}
-//					}
+					//					Task(priority: .userInitiated) {
+					//						if let searchTerm = searchController?.searchBar.text {
+					//							await vm.search(searchTerm: searchTerm)
+					//						}
+					//					}
 					
 				case .upcoming:
 					Task(priority: .userInitiated) {
@@ -121,53 +126,73 @@ struct MovieListView: View {
 struct MovieItem: View {
 	let movie: Movie
 	let onSelect: (() -> Void)?
+	@State private var posterLoaded = false
 	
 	var body: some View {
-		HStack {
-			AsyncImage(url: posterURL(for: movie.posterPath)) { phase in
-				switch phase {
-					case .empty:
-						ProgressView()
-							.frame(width: 60, height: 90)
-						
-					case .success(let image):
-						image
-							.resizable()
-							.scaledToFill()
-							.frame(width: 60, height: 90)
-							.clipped()
-							.cornerRadius(4)
-
-					case .failure(_):
-						//set an error here
-						Image("TMDB_poster")
-							.resizable()
-							.scaledToFill()
-							.frame(width: 60, height: 90)
-							.cornerRadius(4)
-						
-					@unknown default:
-						Image("TMDB_poster")
-							.resizable()
-							.scaledToFill()
-							.frame(width: 60, height: 90)
-							.cornerRadius(4)
+		Button(action: {
+			onSelect?() //Button action returns the annotation
+		}) {
+			HStack {
+				AsyncImage(url: posterURL(for: movie.posterPath)) { phase in
+					switch phase {
+						case .empty:
+							ZStack {
+								Image("TMDB_poster")
+									.resizable()
+									.scaledToFill()
+									.frame(width: 60, height: 90)
+									.cornerRadius(4)
+								ProgressView()
+									.progressViewStyle(CircularProgressViewStyle(tint: .white))
+							}
+							
+						case .success(let image):
+							image
+								.resizable()
+								.scaledToFill()
+								.frame(width: 60, height: 90)
+								.clipped()
+								.cornerRadius(4)
+								.opacity(posterLoaded ? 1 : 0)
+								.onAppear {
+									withAnimation(.easeInOut(duration: 0.75)) {
+										posterLoaded = true
+									}
+								}
+							
+						case .failure(_):
+							//set an error here
+							Image("TMDB_poster")
+								.resizable()
+								.scaledToFill()
+								.frame(width: 60, height: 90)
+								.cornerRadius(4)
+							
+						@unknown default:
+							Image("TMDB_poster")
+								.resizable()
+								.scaledToFill()
+								.frame(width: 60, height: 90)
+								.cornerRadius(4)
+					}
 				}
-			}
-			
-			VStack(alignment: .leading, spacing: 4) {
-				Text(movie.title)
-					.font(.system(size: 18, weight: .bold))
-				Text("User Score: \(movie.voteAverage.percentageString) - Popularity: \(String(format: "%.1f", movie.popularity))")
-					.font(.system(size: 14))
-				Text("Released: \(MDDate.shared.convertDateFormat(inputString: movie.releaseDate, fromFormat: .original, toFormat: .short))")
-					.font(.system(size: 13))
+				
+				VStack(alignment: .leading, spacing: 4) {
+					Text(movie.title)
+						.font(.system(size: 18, weight: .bold))
+						.foregroundColor(.primary)
+					Text("User Score: \(movie.voteAverage.percentageString) - Popularity: \(String(format: "%.1f", movie.popularity))")
+						.font(.system(size: 14))
+						.foregroundColor(.primary)
+					Text("Released: \(MDDate.shared.convertDateFormat(inputString: movie.releaseDate, fromFormat: .original, toFormat: .short))")
+						.font(.system(size: 13))
+						.foregroundColor(.gray)
+				}
+				
+				Spacer()
+				Image(systemName: "chevron.right")
 					.foregroundColor(.gray)
 			}
-			
-			Spacer()
-			Image(systemName: "chevron.right")
-				.foregroundColor(.gray)
 		}
 	}
 	
@@ -176,3 +201,4 @@ struct MovieItem: View {
 		return DataAPI().getImageEndpoint(imagePath: posterPath, type: .poster)
 	}
 }
+

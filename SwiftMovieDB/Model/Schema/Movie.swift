@@ -9,7 +9,7 @@ import Foundation
 
 typealias MovieDataType = Array<Movie>
 
-struct Movie: Codable, Identifiable {
+struct Movie: Codable, Identifiable, Hashable {
 	var id: Int
 	var title: String
 	var overview: String?
