@@ -12,10 +12,6 @@ import Kingfisher
  A wrapper with default options for Kingfisher image downloader.
  */
 
-enum ImageType {
-	case poster, backdrop
-}
-
 class ImageManager: NSObject {
 	
 	@MainActor

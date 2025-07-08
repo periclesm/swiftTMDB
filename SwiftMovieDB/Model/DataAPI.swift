@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum ImageType {
+	case poster, backdrop
+}
+
+
 /**
  Contains tha necessary information and functions to connect with the Movie Database API and retrieve data.
  It constructs the URL to call in order to fetch the required dataset (search, top rated, upcoming etc) by adding required query items.

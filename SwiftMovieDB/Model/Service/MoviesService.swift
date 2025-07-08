@@ -5,8 +5,9 @@
 //  Created by Pericles Maravelakis on 10/6/25.
 //
 
-enum ServiceMode {
+enum ServiceMode: String, CaseIterable, Hashable, Identifiable {
 	case search, top, upcoming, popular
+	var id: String { rawValue }
 }
 
 import Foundation
