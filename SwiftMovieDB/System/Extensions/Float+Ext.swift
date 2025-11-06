@@ -10,7 +10,7 @@ import Foundation
 
 extension Float {
 	
-	///Conerting Float to String and rating to percentage as it appears on the Movie Database website.
+	///Converting Float to String and rating to percentage as it appears on the Movie Database website.
 	var percentageString: String {
 		let value = self * 10
 		return value.truncatingRemainder(dividingBy: 1) == 0
