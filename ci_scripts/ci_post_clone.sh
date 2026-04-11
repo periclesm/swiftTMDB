@@ -4,9 +4,9 @@ set -e
 echo "▶ ci_post_clone: starting"
 
 # 1. Guard — fail loudly if the secret wasn't set in the workflow
-if [ -z "$API_KEY" ]; then
-	echo "❌  ERROR: API_KEY environment variable is not set."
-	echo "    Add it as a secret in your Xcode Cloud workflow settings."
+if [ -z "$TMDB_KEY" ]; then
+	echo "❌ ERROR: TMDB_KEY environment variable is not set."
+	echo " Add it as a secret in your Xcode Cloud workflow settings."
 	exit 1
 fi
 
