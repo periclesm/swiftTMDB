@@ -79,6 +79,5 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-
 _obsolete/
-
+Secrets.xcconfig

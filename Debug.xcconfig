@@ -1,0 +1,8 @@
+// Debug.xcconfig
+// In Xcode: Project → Info → Configurations → Debug → Based On → this file
+
+#include "Secrets.xcconfig"
+
+// Add your debug build settings below:
+// SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG
+// OTHER_LDFLAGS = $(inherited)

@@ -12,7 +12,7 @@ Written in Swift 6 and using UIKit and SwiftUI (defaults to SwiftUI, use the rel
 
 In DataAPI class there is a token value that needs a Bearer Token which is personalized to the Movie Database Developer account.
 
-In order to get the Bearer token, create a free account in [the Movie Database](https://www.themoviedb.org) and get your Read Access token from account settings and add in DataAPI().
+In order to get the Bearer token, create a free account in [the Movie Database](https://www.themoviedb.org) and get your Read Access token from account settings. Follow instructions in the DataAPI class comments to include the token to your project and run the app.
 
 If, on the other hand, you don't want to register in the Movie Database but want to check the app, click on the [Testflight](https://testflight.apple.com/join/1cfsc72Z) link on an iPhone/iPad/Mac and follow the instructions on the page.
 
