@@ -12,7 +12,7 @@ fi
 
 # 2. CI_PRIMARY_REPOSITORY_PATH is always injected by Xcode Cloud
 PROJECT_ROOT="$CI_PRIMARY_REPOSITORY_PATH"
-CONFIG_DIR="$PROJECT_ROOT/Configuration"
+CONFIG_DIR="$PROJECT_ROOT"
 
 echo "▶ Project root: $PROJECT_ROOT"
 
