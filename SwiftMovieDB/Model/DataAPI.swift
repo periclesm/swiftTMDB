@@ -23,20 +23,29 @@ class DataAPI: NSObject {
 	
 	/*
 	 Create a free account in MovieDb (https://www.themoviedb.org/) and get your API Read Access (Bearer) token key from account settings.
-	 Add your API key below to run the app.
+	 Go in Configuration folder and find the Secrets.xconfig.template file.
+	 Rename or copy it and paste the bearer token to the TMDB value (replace the string placeholder with your token)
+	 Close Xcode (just to be safe), clean, build and run...
 	 */
-	
-	var token = <#T##Insert your API KEY here#>
 	
 	func getRequest(url: URL) -> URLRequest {
 		var request = URLRequest(url: url)
+		
 		request.httpMethod = "GET"
 		request.timeoutInterval = 10
 		request.cachePolicy = .reloadRevalidatingCacheData
-		request.allHTTPHeaderFields = [
-			"accept": "application/json",
-			"Authorization": "Bearer \(token)"
-		]
+		
+		let token = Bundle.main.object(forInfoDictionaryKey: "TMDB_KEY") as? String
+		if let token,
+		   !token.isEmpty,
+		   !token.hasPrefix("$(") {
+			request.allHTTPHeaderFields = [
+				"accept": "application/json",
+				"Authorization": "Bearer \(token)"
+			]
+		} else {
+			debugPrint("Error with TMDB API KEY: \(token)")
+		}
 		
 		return request
 	}

@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		682B6C802F87D04E008D6963 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 682B6C7F2F87D04E008D6963 /* Release.xcconfig */; };
+		682B6C812F87D04E008D6963 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 682B6C7F2F87D04E008D6963 /* Release.xcconfig */; };
+		682B6C832F87D063008D6963 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 682B6C822F87D063008D6963 /* Debug.xcconfig */; };
+		682B6C842F87D063008D6963 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 682B6C822F87D063008D6963 /* Debug.xcconfig */; };
 		684DFA582E1D577C002AEE22 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 684DFA572E1D577C002AEE22 /* Kingfisher */; };
 		68F5AD352DF6D0550028F800 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 68F5AD342DF6D0550028F800 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		68066C652E184A27009C91D3 /* SwiftMovieDB SUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftMovieDB SUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		682B6C7F2F87D04E008D6963 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		682B6C822F87D063008D6963 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		68F5AC822DF6B4540028F800 /* SwiftMovieDB UIKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SwiftMovieDB UIKit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,6 +96,8 @@
 				68F5AC842DF6B4540028F800 /* SwiftMovieDB */,
 				684DFA562E1D577C002AEE22 /* Frameworks */,
 				68F5AC832DF6B4540028F800 /* Products */,
+				682B6C7F2F87D04E008D6963 /* Release.xcconfig */,
+				682B6C822F87D063008D6963 /* Debug.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -189,11 +197,15 @@
 		68066C612E184A27009C91D3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				682B6C832F87D063008D6963 /* Debug.xcconfig in Resources */,
+				682B6C802F87D04E008D6963 /* Release.xcconfig in Resources */,
 			);
 		};
 		68F5AC802DF6B4540028F800 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			files = (
+				682B6C812F87D04E008D6963 /* Release.xcconfig in Resources */,
+				682B6C842F87D063008D6963 /* Debug.xcconfig in Resources */,
 			);
 		};
 /* End PBXResourcesBuildPhase section */
@@ -214,11 +226,12 @@
 /* Begin XCBuildConfiguration section */
 		68066C632E184A27009C91D3 /* Debug configuration for PBXNativeTarget "SwiftMovieDB SUI" */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 682B6C822F87D063008D6963 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/InfoSUI.plist;
@@ -248,11 +261,12 @@
 		};
 		68066C642E184A27009C91D3 /* Release configuration for PBXNativeTarget "SwiftMovieDB SUI" */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 682B6C7F2F87D04E008D6963 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/InfoSUI.plist;
@@ -282,11 +296,12 @@
 		};
 		68F5AC962DF6B4550028F800 /* Debug configuration for PBXNativeTarget "SwiftMovieDB UIKit" */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 682B6C822F87D063008D6963 /* Debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;
@@ -317,11 +332,12 @@
 		};
 		68F5AC972DF6B4550028F800 /* Release configuration for PBXNativeTarget "SwiftMovieDB UIKit" */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 682B6C7F2F87D04E008D6963 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = AFNBPBD3C5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SwiftMovieDB/Info.plist;

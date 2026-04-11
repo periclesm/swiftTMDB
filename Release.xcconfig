@@ -1,0 +1,7 @@
+// Release.xcconfig
+// In Xcode: Project → Info → Configurations → Release → Based On → this file
+
+#include "Secrets.xcconfig"
+
+// Add your release build settings below:
+// OTHER_LDFLAGS = $(inherited)

@@ -1,6 +1,7 @@
 ._*
 .DS_Store
 .Trashes
+.derived-data-log-*
 
 # Xcode
 #
@@ -78,5 +79,5 @@ fastlane/test_output
 
 iOSInjectionProject/
 
-
 _obsolete/
+Secrets.xcconfig
